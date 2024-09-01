@@ -1,0 +1,8 @@
+#!/bin/sh
+
+total_mem=$(free -m | awk '/^Mem:/{print $2}')
+used_mem=$(free -m | awk '/^Mem:/{print $3}')
+
+ram_usage=$(awk "BEGIN {printf \"%.2f\", ($used_mem/$total_mem)*100}")
+
+printf "%s" "$ram_usage"

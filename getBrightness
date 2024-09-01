@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# get brightness level
+brightness=$(light -G)
+
+printf '%s' "$brightness"

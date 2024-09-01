@@ -1,0 +1,11 @@
+#!/bin/sh
+
+wall=$(find ~/Pictures/wallpaper/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
+
+xwallpaper --zoom $wall
+
+wal -c
+wal -i $wall
+
+xdotool key Super+ctrl+r
+/home/heriberto/.local/bin/rasiColors

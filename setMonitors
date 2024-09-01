@@ -1,0 +1,4 @@
+#!/bin/sh
+
+xrandr --output DP-2 --primary
+xrandr --output HDMI-0 --left-of DP-2

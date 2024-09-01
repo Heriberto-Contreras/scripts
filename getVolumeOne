@@ -1,0 +1,5 @@
+#!/bin/sh
+
+volume=$(amixer -c 1 get Master | grep -oE '[0-9]{1,3}%')
+
+printf '%s' "$volume"

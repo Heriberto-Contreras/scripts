@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Define the path to the Pywal colors.json file and the output Rofi theme file
+WAL_COLORS_JSON="$HOME/.cache/wal/colors.json"
+ROFI_THEME="$HOME/.config/rofi/colors.rasi"
+
+# Check if colors.json exists
+if [[ ! -f "$WAL_COLORS_JSON" ]]; then
+    echo "Error: $WAL_COLORS_JSON not found. Please run pywal first."
+    exit 1
+fi
+
+# Use jq to extract colors from colors.json
+bg=$(jq -r '.colors.color9' "$WAL_COLORS_JSON")
+
+
+# Create the Rofi theme file with extracted colors
+cat <<EOF > "$ROFI_THEME"
+* {
+    background:     #1E212700; // #1E2127FF this is the transparent background (WILL NOT CHANGE)
+    background-alt: #282B31FF; // #282B31FF the background of the things that are not selected (MIGHT NOT CHANGE)
+    foreground:     #FFFFFFFF; // #FFFFFFFF the text of the icon, app, and search (will have to be white or black for readablility)
+    selected:       ${bg}ff; // #61AFEFFF the bar that hovers over the application (WILL CHANGE BASED ON THE WALLPAPER)
+    active:         #98C379FF; // #98C379FF (DO NOT CHANGE)
+    urgent:         #E06C75FF; // #E06C75FF (DO NOT CHANGE)
+}
+EOF
+
+echo "Rofi theme file updated with Pywal colors at $ROFI_THEME"
